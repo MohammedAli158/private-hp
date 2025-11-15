@@ -4,6 +4,19 @@
 	--background: #ffffff;
 	--foreground: #171717;
 }
+html {
+  font-family: var(--font-space-grotesk);
+}
+
+body {
+  font-family: var(--font-figtree), system-ui, sans-serif;
+}
+
+code, pre {
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+
 
 @theme inline {
 	--color-background: var(--background);
