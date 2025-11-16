@@ -17,50 +17,59 @@ export default function ThreeDCardDemo({
   enrollLink = "#",
 }: ThreeDCardDemoProps) {
   return (
-    <CardContainer className="inter-var">
-      <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] rounded-xl p-6 border">
+    <CardContainer className="inter-var h-full">
+      {/* MODIFIED: Glassmorphism card body with premium effects */}
+      <CardBody className="h-full w-full bg-slate-800/50 backdrop-blur-xl rounded-2xl ring-1 ring-emerald-500/20 shadow-2xl shadow-black/40 transition-all duration-300 group-hover:ring-emerald-500/40 group-hover:shadow-emerald-500/20 p-6">
+        
+        {/* MODIFIED: Premium gradient title with display font */}
         <CardItem
           translateZ={50}
-          className="text-lg font-bold text-neutral-600 dark:text-white"
+          className="font-display text-2xl font-bold bg-gradient-to-r from-white to-emerald-400 bg-clip-text text-transparent mb-3"
         >
           {title}
         </CardItem>
 
+        {/* MODIFIED: Subtle subtitle with better spacing */}
         <CardItem
           as="p"
           translateZ={60}
-          className="text-neutral-500 text-xs max-w-sm mt-2 dark:text-neutral-300"
+          className="text-gray-400 text-sm max-w-sm leading-relaxed mb-6"
         >
           {subtitle}
         </CardItem>
 
-        <CardItem translateZ={100} className="w-full mt-4">
-          <img
-            src={imageUrl}
-            height="800"
-            width="800"
-            className="h-44 w-full object-cover rounded-xl group-hover/card:shadow-xl"
-            alt={title}
-          />
+        {/* MODIFIED: Enhanced image with gradient overlay */}
+        <CardItem translateZ={100} className="w-full mb-8">
+          <div className="relative group">
+            <img
+              src={imageUrl}
+              className="h-48 w-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.02]"
+              alt={title}
+            />
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
         </CardItem>
 
-        <div className="flex justify-between items-center mt-10">
+        {/* MODIFIED: Premium buttons with hover effects */}
+        <div className="flex justify-between items-center">
           <CardItem
             translateZ={20}
             as="a"
             href={enrollLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white hover:underline"
+            className="text-emerald-400 text-sm font-medium hover:text-emerald-300 transition-all duration-200 relative"
           >
-            Learn more →
+            Learn more 
+            <span className="ml-1 transition-transform group-hover:ml-2">→</span>
+            <div className="h-px w-0 bg-emerald-400 transition-all duration-300 group-hover:w-full mt-1"></div>
           </CardItem>
 
           <CardItem
             translateZ={20}
             as="button"
             onClick={() => window.open(enrollLink, "_blank")}
-            className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+            className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-400 text-black text-sm font-bold hover:from-emerald-400 hover:to-emerald-500 transition-all duration-200 hover:-translate-y-0.5 shadow-lg hover:shadow-emerald-500/25"
           >
             Enroll Now
           </CardItem>
