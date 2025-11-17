@@ -1,6 +1,6 @@
 "use client";
-
 import React, { useRef, useState } from "react";
+import type { JSX } from "react";
 
 interface CardContainerProps {
   children: React.ReactNode;
@@ -68,34 +68,33 @@ export const CardBody: React.FC<CardBodyProps> = ({
   );
 };
 
-interface CardItemProps {
-  as?: keyof JSX.IntrinsicElements;
+interface CardItemProps<T extends React.ElementType> {
+  as?: T;
   children: React.ReactNode;
   className?: string;
-  translateZ?: number | string;
-  [key: string]: any;
+  translateZ?: number;
+  style?: React.CSSProperties;
 }
 
-export const CardItem: React.FC<CardItemProps> = ({
-  as: Tag = "div",
+export function CardItem<T extends React.ElementType = "div">({
+  as,
   children,
   className = "",
   translateZ = 0,
+  style,
   ...rest
-}) => {
-  const ref = useRef<HTMLDivElement>(null);
-
+}: CardItemProps<T> & React.ComponentPropsWithoutRef<T>) {
+  const TagElement = (as || "div") as React.ElementType;
+  const ref = useRef<HTMLElement>(null);
+  
   return (
-    // @ts-ignore
-    <Tag
+    <TagElement
       ref={ref}
       className={`w-fit transition duration-200 ease-linear ${className}`}
-      style={{
-        transform: `translateZ(${translateZ}px)`,
-      }}
+      style={{ ...style, transform: `translateZ(${translateZ}px)` }}
       {...rest}
     >
       {children}
-    </Tag>
+    </TagElement>
   );
-};
+}
